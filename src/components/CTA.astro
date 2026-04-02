@@ -6,8 +6,10 @@ interface Props {
 
 const { text = 'お問い合わせ・無料相談はこちら', size = 'default' } = Astro.props;
 const style = size === 'small' ? 'font-size:0.9rem; padding:14px 32px;' : '';
+const hasContact = Astro.url.pathname === '/' || Astro.url.pathname.startsWith('/area/');
+const href = hasContact ? '#contact' : '/#contact';
 ---
 
 <div style="text-align:center; padding:32px 24px 0;">
-  <a href="#contact" class="btn-primary" style={style}>{text}</a>
+  <a href={href} class="btn-primary" style={style}>{text}</a>
 </div>

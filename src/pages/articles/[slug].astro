@@ -13,6 +13,8 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
+const [y, m, d] = article.data.date.split('-');
+const displayDate = `${y}年${parseInt(m)}月${parseInt(d)}日`;
 ---
 
 <Base title={`${article.data.title}｜お墓きれい`} description={article.data.description}>
@@ -20,7 +22,7 @@ const { Content } = await render(article);
     <div class="container">
       <div class="article-meta">
         <span class="article-category">{article.data.category}</span>
-        <time datetime={article.data.date}>{article.data.date}</time>
+        <time datetime={article.data.date}>{displayDate}</time>
       </div>
       <h1>{article.data.title}</h1>
       <div class="article-body">
