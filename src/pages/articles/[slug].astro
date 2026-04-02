@@ -1,0 +1,102 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.data.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+
+<Base title={`${article.data.title}｜お墓きれい`} description={article.data.description}>
+  <article class="article">
+    <div class="container">
+      <div class="article-meta">
+        <span class="article-category">{article.data.category}</span>
+        <time datetime={article.data.date}>{article.data.date}</time>
+      </div>
+      <h1>{article.data.title}</h1>
+      <div class="article-body">
+        <Content />
+      </div>
+      <CTA />
+    </div>
+  </article>
+</Base>
+
+<style is:global>
+  .article {
+    background: var(--white);
+    padding: 56px 24px 72px;
+  }
+  .article .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .article-category {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.75rem;
+    padding: 3px 12px;
+    border-radius: 2px;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .article-meta time {
+    font-size: 0.8rem;
+    color: var(--stone-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .article h1 {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .article-body h2 {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .article-body h3 {
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin: 32px 0 12px;
+  }
+  .article-body p {
+    font-size: 0.92rem;
+    color: var(--text);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+  .article-body ul, .article-body ol {
+    margin: 16px 0 24px 20px;
+    font-size: 0.92rem;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .article-body li {
+    margin-bottom: 6px;
+  }
+  .article-body strong {
+    color: var(--navy);
+  }
+</style>

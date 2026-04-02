@@ -336,6 +336,45 @@ const { title, description } = Astro.props;
     color: var(--stone-light);
     font-family: "Hiragino Kaku Gothic ProN", sans-serif;
   }
+  .area-links {
+    margin-top: 36px;
+  }
+  .area-links h3 {
+    font-size: 0.95rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .area-link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .area-link-card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .area-link-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .area-link-name {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .area-link-loc {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--stone-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
 
   /* ── 料金 ── */
   .pricing { background: var(--white); }
