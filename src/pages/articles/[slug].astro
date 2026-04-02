@@ -28,6 +28,37 @@ const displayDate = `${y}年${parseInt(m)}月${parseInt(d)}日`;
       <div class="article-body">
         <Content />
       </div>
+
+      <!-- 中間CTA -->
+      <div class="mid-cta">
+        <p>お墓の汚れでお困りですか？</p>
+        <a href="/#contact" class="btn-primary" style="font-size:0.9rem; padding:14px 32px;">無料相談はこちら</a>
+      </div>
+
+      <!-- 対応霊園リンク -->
+      <div class="related-areas">
+        <h2>対応霊園のご案内</h2>
+        <p>以下の霊園をはじめ、東京・神奈川のお墓清掃に対応しています。</p>
+        <div class="related-area-grid">
+          <a href="/area/tama-reien/" class="related-area-card">
+            <span class="related-area-name">多磨霊園</span>
+            <span class="related-area-loc">東京都府中市</span>
+          </a>
+          <a href="/area/aoyama-reien/" class="related-area-card">
+            <span class="related-area-name">青山霊園</span>
+            <span class="related-area-loc">東京都港区</span>
+          </a>
+          <a href="/area/kodaira-reien/" class="related-area-card">
+            <span class="related-area-name">小平霊園</span>
+            <span class="related-area-loc">東京都東村山市</span>
+          </a>
+          <a href="/area/yanaka-reien/" class="related-area-card">
+            <span class="related-area-name">谷中霊園</span>
+            <span class="related-area-loc">東京都台東区</span>
+          </a>
+        </div>
+      </div>
+
       <CTA />
     </div>
   </article>
@@ -100,5 +131,66 @@ const displayDate = `${y}年${parseInt(m)}月${parseInt(d)}日`;
   }
   .article-body strong {
     color: var(--navy);
+  }
+  .mid-cta {
+    text-align: center;
+    background: linear-gradient(135deg, #f0ebe4, #e8e1d8);
+    border: 1px solid var(--accent-light);
+    border-radius: 4px;
+    padding: 32px 24px;
+    margin: 48px 0;
+  }
+  .mid-cta p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    font-weight: bold;
+    margin-bottom: 16px;
+    font-family: "Hiragino Mincho ProN", serif;
+  }
+  .related-areas {
+    margin: 48px 0 0;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .related-areas h2 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .related-areas > p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    margin-bottom: 20px;
+  }
+  .related-area-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .related-area-card {
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .related-area-card:hover {
+    border-color: var(--accent);
+  }
+  .related-area-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .related-area-loc {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--stone-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
   }
 </style>

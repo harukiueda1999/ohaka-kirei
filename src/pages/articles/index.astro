@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const articles = await getCollection('articles');
+const sorted = articles.sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<Base
+  title="お墓のお役立ち記事一覧｜お墓きれい"
+  description="墓石の黒ずみやコケの対処法、お墓の管理方法など、お墓に関するお役立ち情報をまとめています。"
+>
+  <section class="article-list-section">
+    <div class="container">
+      <div class="section-label">Articles</div>
+      <h1 class="section-title">お墓のお役立ち記事</h1>
+      <div class="divider"></div>
+      <p class="section-lead">墓石のお手入れ方法やお墓の管理に関する情報をお届けしています。</p>
+      <div class="article-list">
+        {sorted.map((article) => {
+          const [y, m, d] = article.data.date.split('-');
+          const displayDate = `${y}年${parseInt(m)}月${parseInt(d)}日`;
+          return (
+            <a href={`/articles/${article.data.slug}/`} class="article-card">
+              <div class="article-card-meta">
+                <span class="article-card-category">{article.data.category}</span>
+                <time datetime={article.data.date}>{displayDate}</time>
+              </div>
+              <h2>{article.data.title}</h2>
+              <p>{article.data.description}</p>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .article-list-section { background: var(--white); padding: 72px 24px; }
+  .article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .article-card {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px 28px;
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--bg);
+  }
+  .article-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .article-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .article-card-category {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.72rem;
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .article-card-meta time {
+    font-size: 0.78rem;
+    color: var(--stone-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .article-card h2 {
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .article-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    line-height: 1.6;
+  }
+</style>
