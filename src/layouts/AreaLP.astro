@@ -245,7 +245,30 @@ const { title, description, name, aboutText, problems, serviceLead, faqItems } =
 <!-- 対応エリア補足 -->
 <section class="other-areas">
   <div class="container">
-    <p class="other-areas-text">{name}以外にも、東京・神奈川を中心にさまざまな霊園・墓地のお墓清掃に対応しています。対応可否はお気軽にお問い合わせください。</p>
+    <h2 class="other-areas-heading">その他の対応霊園</h2>
+    <p class="other-areas-lead">{name}以外にも、東京・神奈川を中心にさまざまな霊園・墓地に対応しています。</p>
+    <div class="other-area-grid">
+      {[
+        { href: "/area/tama-reien/", label: "多磨霊園", loc: "東京都府中市" },
+        { href: "/area/aoyama-reien/", label: "青山霊園", loc: "東京都港区" },
+        { href: "/area/kodaira-reien/", label: "小平霊園", loc: "東京都東村山市" },
+        { href: "/area/yanaka-reien/", label: "谷中霊園", loc: "東京都台東区" },
+        { href: "/area/yahashira-reien/", label: "八柱霊園", loc: "千葉県松戸市" },
+        { href: "/area/somei-reien/", label: "染井霊園", loc: "東京都豊島区" },
+        { href: "/area/hachioji-reien/", label: "八王子霊園", loc: "東京都八王子市" },
+        { href: "/area/hino-koen-bochi/", label: "日野公園墓地", loc: "横浜市港南区" },
+        { href: "/area/kamakura-reien/", label: "鎌倉霊園", loc: "神奈川県鎌倉市" },
+        { href: "/area/kuboyama-bochi/", label: "久保山墓地", loc: "横浜市西区" },
+        { href: "/area/minamitama-reien/", label: "南多摩都市霊園", loc: "東京都八王子市" },
+        { href: "/area/zoshigaya-reien/", label: "雑司ヶ谷霊園", loc: "東京都豊島区" },
+      ].filter(a => !Astro.url.pathname.includes(a.href.replace(/\/$/, '').split('/').pop() || '')).slice(0, 8).map(a => (
+        <a href={a.href} class="other-area-card">
+          <span class="other-area-name">{a.label}</span>
+          <span class="other-area-loc">{a.loc}</span>
+        </a>
+      ))}
+    </div>
+    <p class="other-areas-note">上記以外の霊園・墓地にも対応しています。お気軽にお問い合わせください。</p>
   </div>
 </section>
 
@@ -264,13 +287,58 @@ const { title, description, name, aboutText, problems, serviceLead, faqItems } =
 
 <style>
   .area-intro { background: var(--white); }
-  .other-areas { background: var(--bg); padding: 32px 24px; }
-  .other-areas-text {
-    font-size: 0.82rem;
-    color: var(--stone-light);
+  .other-areas { background: var(--bg); padding: 56px 24px; }
+  .other-areas-heading {
+    font-size: 1.2rem;
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .other-areas-lead {
+    font-size: 0.85rem;
+    color: var(--text-light);
     font-family: "Hiragino Kaku Gothic ProN", sans-serif;
     text-align: center;
     max-width: 600px;
+    margin: 0 auto 24px;
+  }
+  .other-area-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    max-width: 700px;
     margin: 0 auto;
+  }
+  .other-area-card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .other-area-card:hover {
+    border-color: var(--accent);
+  }
+  .other-area-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .other-area-loc {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--stone-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .other-areas-note {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: var(--stone-light);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
   }
 </style>
