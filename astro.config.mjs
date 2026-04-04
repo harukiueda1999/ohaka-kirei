@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ohaka-kirei.vercel.app',
+  site: 'https://ohaka-kirei.jp',
   integrations: [sitemap()],
 });
