@@ -17,6 +17,24 @@ const { title, description } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
+  <link rel="canonical" href={Astro.url.href}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={Astro.url.href}>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="お墓きれい">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "お墓きれい",
+    "description": "東京・神奈川を中心とした墓石清掃代行サービス",
+    "url": "https://ohaka-kirei.vercel.app",
+    "areaServed": ["東京都", "神奈川県", "埼玉県", "千葉県"],
+    "priceRange": "¥30,000〜",
+  })} />
   <slot name="head" />
 </head>
 <body>
