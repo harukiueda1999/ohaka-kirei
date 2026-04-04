@@ -7,17 +7,36 @@ export async function getStaticPaths() {
   const articles = await getCollection('articles');
   return articles.map((article) => ({
     params: { slug: article.data.slug },
-    props: { article },
+    props: { article, allArticles: articles },
   }));
 }
 
-const { article } = Astro.props;
+const { article, allArticles } = Astro.props;
 const { Content } = await render(article);
 const [y, m, d] = article.data.date.split('-');
 const displayDate = `${y}年${parseInt(m)}月${parseInt(d)}日`;
+
+// 同カテゴリの関連記事（自分以外、最大4件）
+const relatedArticles = allArticles
+  .filter((a) => a.data.category === article.data.category && a.data.slug !== article.data.slug)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 4);
+
+// Article構造化データ
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": article.data.title,
+  "description": article.data.description,
+  "datePublished": article.data.date,
+  "author": { "@type": "Organization", "name": "お墓きれい" },
+  "publisher": { "@type": "Organization", "name": "お墓きれい", "url": "https://ohaka-kirei.vercel.app" },
+  "mainEntityOfPage": `https://ohaka-kirei.vercel.app/articles/${article.data.slug}/`,
+};
 ---
 
 <Base title={`${article.data.title}｜お墓きれい`} description={article.data.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <article class="article">
     <div class="container">
       <div class="article-meta">
@@ -75,6 +94,21 @@ const displayDate = `${y}年${parseInt(m)}月${parseInt(d)}日`;
         </div>
         <p class="related-area-note">上記以外の霊園・墓地にも対応しています。お気軽にお問い合わせください。</p>
       </div>
+
+      <!-- 関連記事 -->
+      {relatedArticles.length > 0 && (
+        <div class="related-articles">
+          <h2>関連記事</h2>
+          <div class="related-article-grid">
+            {relatedArticles.map((ra) => (
+              <a href={`/articles/${ra.data.slug}/`} class="related-article-card">
+                <span class="related-article-category">{ra.data.category}</span>
+                <span class="related-article-title">{ra.data.title}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       <CTA />
     </div>
@@ -215,5 +249,54 @@ const displayDate = `${y}年${parseInt(m)}月${parseInt(d)}日`;
     font-size: 0.78rem;
     color: var(--stone-light);
     font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .related-articles {
+    margin: 48px 0 0;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .related-articles h2 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .related-article-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 600px) {
+    .related-article-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .related-article-card {
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .related-article-card:hover {
+    border-color: var(--accent);
+  }
+  .related-article-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    background: var(--navy);
+    color: var(--white);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .related-article-title {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--navy);
+    font-weight: bold;
+    line-height: 1.5;
   }
 </style>

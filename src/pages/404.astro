@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="ページが見つかりません｜お墓きれい" description="お探しのページは存在しません。">
+  <section class="error-page">
+    <div class="error-container">
+      <h1>ページが見つかりません</h1>
+      <p>お探しのページは存在しないか、移動された可能性があります。</p>
+      <div class="error-links">
+        <a href="/" class="btn-primary">トップページへ</a>
+        <a href="/articles/" class="btn-secondary">お役立ち記事一覧</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .error-page {
+    background: var(--white);
+    padding: 120px 24px;
+    text-align: center;
+  }
+  .error-container {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .error-page h1 {
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+    font-family: "Hiragino Mincho ProN", serif;
+  }
+  .error-page p {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+  .error-links {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-secondary {
+    display: inline-block;
+    background: var(--white);
+    color: var(--navy);
+    border: 1px solid var(--navy);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    transition: background 0.2s;
+  }
+  .btn-secondary:hover {
+    background: var(--bg);
+  }
+</style>
