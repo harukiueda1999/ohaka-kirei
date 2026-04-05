@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const articles = await getCollection('articles');
 const sorted = articles.sort((a, b) => b.data.date.localeCompare(a.data.date));
@@ -10,6 +11,10 @@ const sorted = articles.sort((a, b) => b.data.date.localeCompare(a.data.date));
   title="お墓のお役立ち記事一覧｜お墓きれい"
   description="墓石の黒ずみやコケの対処法、お墓の管理方法など、お墓に関するお役立ち情報をまとめています。"
 >
+  <Breadcrumb items={[
+    { label: "トップ", href: "/" },
+    { label: "コラム" },
+  ]} />
   <section class="article-list-section">
     <div class="container">
       <div class="section-label">Articles</div>
