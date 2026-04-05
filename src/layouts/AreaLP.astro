@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import CTA from '../components/CTA.astro';
 import FAQSchema from '../components/FAQSchema.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 
 interface FAQItem {
   question: string;
@@ -24,6 +25,12 @@ const { title, description, name, aboutText, problems, serviceLead, faqItems } =
 <Base title={title} description={description}>
 
 <FAQSchema slot="head" items={faqItems} />
+
+<Breadcrumb items={[
+  { label: "トップ", href: "/" },
+  { label: "対応エリア" },
+  { label: name },
+]} />
 
 <!-- ヒーロー -->
 <section class="hero" style="background:linear-gradient(160deg, rgba(26,44,69,0.75) 0%, rgba(42,64,96,0.75) 100%), url('/images/cleaning-work-back.jpg') center/cover no-repeat;">

@@ -1,0 +1,74 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+const schemaItems = items.map((item, i) => ({
+  "@type": "ListItem",
+  "position": i + 1,
+  "name": item.label,
+  ...(item.href ? { "item": `https://ohaka-kirei.jp${item.href}` } : {}),
+}));
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": schemaItems,
+})} />
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    {items.map((item, i) => (
+      <li>
+        {item.href && i < items.length - 1 ? (
+          <a href={item.href}>{item.label}</a>
+        ) : (
+          <span>{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb {
+    padding: 12px 24px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    max-width: 860px;
+    margin: 0 auto;
+    font-size: 0.75rem;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--stone-light);
+  }
+  .breadcrumb li:not(:last-child)::after {
+    content: ">";
+    margin: 0 8px;
+    color: var(--stone-light);
+  }
+  .breadcrumb a {
+    color: var(--stone-light);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .breadcrumb li:last-child span {
+    color: var(--text);
+  }
+</style>
