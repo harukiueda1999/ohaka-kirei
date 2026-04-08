@@ -316,6 +316,10 @@ const { title, description, name, aboutText, problems, serviceLead, faqItems, ar
   <div class="container">
     <h2>{name}のお墓清掃、お気軽にご相談ください</h2>
     <p>費用や作業内容について、無料でご相談いただけます。強引なご案内は一切行いません。</p>
+    <div class="contact-phone">
+      <p>お電話でのご相談</p>
+      <a href="tel:07084249410">070-8424-9410</a>
+    </div>
     <div style="width:100%; max-width:640px; margin:0 auto; background:var(--white); border-radius:6px; overflow:hidden;">
       <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSflsamMLHBd9LgnTjPm5xKBRXpOF44xpDsxHeEXF87jdV5tRg/viewform?embedded=true" width="100%" height="2200" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" style="display:block;">読み込んでいます…</iframe>
     </div>
@@ -358,6 +362,38 @@ const { title, description, name, aboutText, problems, serviceLead, faqItems, ar
     font-size: 0.82rem;
   }
   .info-table a:hover { text-decoration: underline; }
+  .contact-phone {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 24px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contact-phone p {
+    font-size: 0.85rem;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 8px;
+  }
+  .contact-phone a {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: none;
+    font-family: Georgia, serif;
+    letter-spacing: 0.05em;
+  }
+  .contact-phone a:hover { opacity: 0.85; }
+  .contact-phone .contact-phone-note {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
   .other-areas { background: var(--bg); padding: 56px 24px; }
   .other-areas-heading {
     font-size: 1.2rem;
