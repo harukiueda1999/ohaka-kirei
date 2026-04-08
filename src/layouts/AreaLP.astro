@@ -9,6 +9,16 @@ interface FAQItem {
   answer: string;
 }
 
+interface AreaInfo {
+  address: string;
+  access: string;
+  type: string;
+  totalPlots: string;
+  hours?: string;
+  established?: string;
+  url?: string;
+}
+
 interface Props {
   title: string;
   description: string;
@@ -17,9 +27,10 @@ interface Props {
   problems: string[];
   serviceLead: string;
   faqItems: FAQItem[];
+  areaInfo?: AreaInfo;
 }
 
-const { title, description, name, aboutText, problems, serviceLead, faqItems } = Astro.props;
+const { title, description, name, aboutText, problems, serviceLead, faqItems, areaInfo } = Astro.props;
 ---
 
 <Base title={title} description={description}>
@@ -69,6 +80,27 @@ const { title, description, name, aboutText, problems, serviceLead, faqItems } =
     </div>
   </div>
 </section>
+
+{areaInfo && (
+<section class="area-info">
+  <div class="container">
+    <div class="section-label">Information</div>
+    <h2 class="section-title">{name}の基本情報</h2>
+    <div class="divider"></div>
+    <table class="info-table">
+      <tbody>
+        <tr><th>所在地</th><td>{areaInfo.address}</td></tr>
+        <tr><th>アクセス</th><td>{areaInfo.access}</td></tr>
+        <tr><th>霊園の種類</th><td>{areaInfo.type}</td></tr>
+        <tr><th>総区画数</th><td>{areaInfo.totalPlots}</td></tr>
+        {areaInfo.hours && <tr><th>開園時間</th><td>{areaInfo.hours}</td></tr>}
+        {areaInfo.established && <tr><th>開園</th><td>{areaInfo.established}</td></tr>}
+        {areaInfo.url && <tr><th>公式サイト</th><td><a href={areaInfo.url} target="_blank" rel="noopener noreferrer">{areaInfo.url}</a></td></tr>}
+      </tbody>
+    </table>
+  </div>
+</section>
+)}
 
 <!-- 提供価値 -->
 <section class="values">
@@ -294,6 +326,38 @@ const { title, description, name, aboutText, problems, serviceLead, faqItems } =
 
 <style>
   .area-intro { background: var(--white); }
+  .area-info { background: var(--bg); }
+  .info-table {
+    max-width: 640px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    font-size: 0.88rem;
+  }
+  .info-table th,
+  .info-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    line-height: 1.6;
+  }
+  .info-table th {
+    width: 120px;
+    color: var(--navy);
+    font-weight: 600;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+  .info-table td {
+    color: var(--text);
+  }
+  .info-table a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.82rem;
+  }
+  .info-table a:hover { text-decoration: underline; }
   .other-areas { background: var(--bg); padding: 56px 24px; }
   .other-areas-heading {
     font-size: 1.2rem;
