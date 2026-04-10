@@ -282,6 +282,18 @@ import CTA from '../components/CTA.astro';
   </div>
 </section>
 
+<script slot="head" type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "遠方に住んでいますが、依頼できますか？", "acceptedAnswer": { "@type": "Answer", "text": "はい、むしろ遠方にお住まいの方からのご依頼が多いです。お電話・メールでのやり取りで完結しますので、現地に来ていただく必要はありません。作業後は写真でご報告します。" } },
+    { "@type": "Question", "name": "本当にちゃんとやってもらえるか不安です。", "acceptedAnswer": { "@type": "Answer", "text": "ご安心ください。すべての作業で、作業前・作業後の写真をお送りしています。清掃の内容を目で確認していただけます。" } },
+    { "@type": "Question", "name": "お墓の状態がひどく傷んでいますが、対応できますか？", "acceptedAnswer": { "@type": "Answer", "text": "私たちのサービスは「日常清掃の代行」が基本です。石材の修復や彫刻の補修など専門的な作業は対応外となります。ただし、状況をご報告したうえで、必要に応じて専門業者をご紹介することは可能です。" } },
+    { "@type": "Question", "name": "墓地・霊園の管理者に許可は必要ですか？", "acceptedAnswer": { "@type": "Answer", "text": "霊園によって規則が異なります。事前にご確認いただくか、ご依頼時にお申し付けください。確認が必要な場合は一緒に対応します。" } },
+    { "@type": "Question", "name": "1回だけの依頼でも大丈夫ですか？", "acceptedAnswer": { "@type": "Answer", "text": "はい、単発でのご依頼も歓迎しています。お盆やお彼岸前だけご依頼される方も多いです。" } },
+  ],
+})} />
+
 <!-- FAQ -->
 <section class="faq">
   <div class="container">

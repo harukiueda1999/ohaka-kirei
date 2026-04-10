@@ -30,9 +30,11 @@ const articleSchema = {
   "headline": article.data.title,
   "description": article.data.description,
   "datePublished": article.data.date,
+  "dateModified": article.data.date,
   "author": { "@type": "Organization", "name": "お墓きれい" },
-  "publisher": { "@type": "Organization", "name": "お墓きれい", "url": "https://ohaka-kirei.jp" },
+  "publisher": { "@type": "Organization", "name": "お墓きれい", "url": "https://ohaka-kirei.jp", "logo": { "@type": "ImageObject", "url": "https://ohaka-kirei.jp/favicon.svg" } },
   "mainEntityOfPage": `https://ohaka-kirei.jp/articles/${article.data.slug}/`,
+  "image": "https://ohaka-kirei.jp/images/cleaning-work-front.jpg",
 };
 ---
 

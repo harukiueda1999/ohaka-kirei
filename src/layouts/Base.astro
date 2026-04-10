@@ -18,15 +18,21 @@ const { title, description } = Astro.props;
   <title>{title}</title>
   <meta name="description" content={description}>
   <link rel="canonical" href={Astro.url.href}>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:url" content={Astro.url.href}>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="お墓きれい">
   <meta property="og:locale" content="ja_JP">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://ohaka-kirei.jp/images/cleaning-work-front.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="https://ohaka-kirei.jp/images/cleaning-work-front.jpg">
   <meta name="format-detection" content="telephone=no">
   <meta name="google-site-verification" content="8Fcldzq07amOK2mNuohv67xGwtO4PFPRy60YBLEkyII">
   <script type="application/ld+json" set:html={JSON.stringify({
@@ -35,8 +41,21 @@ const { title, description } = Astro.props;
     "name": "お墓きれい",
     "description": "東京・神奈川を中心とした墓石清掃代行サービス",
     "url": "https://ohaka-kirei.jp",
+    "telephone": "070-8424-9410",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "東京都",
+      "addressCountry": "JP",
+    },
     "areaServed": ["東京都", "神奈川県", "埼玉県", "千葉県"],
     "priceRange": "¥30,000〜",
+    "image": "https://ohaka-kirei.jp/images/cleaning-work-front.jpg",
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "お墓きれい",
+    "url": "https://ohaka-kirei.jp",
   })} />
   <slot name="head" />
 </head>
